@@ -12,11 +12,12 @@ Install Beads v1+ (2026-04-02) https://github.com/gastownhall/beads
 $ git clone --recur git@github.com:brettviren/ask-repo.git
 $ cd ask-repo/
 
-$ bd init
-$ bd dolt remote add origin git@github.com:brettviren/ask-repo.git
+$ bd init  # accept defaults
 $ bd dolt pull
 
-$ bd search [pattern]   # search KB
+$ bd search depos   # search KB for issues related to "depos"
+
+$ bd show ask-repo-gl3
 
 $ claude
 
