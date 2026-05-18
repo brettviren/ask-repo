@@ -52,6 +52,19 @@ bd close <id>         # Complete work
 
 ---
 
+## Fresh Clone Setup
+
+After cloning this repo, the Beads Dolt database is not present (it is gitignored). Reconstruct it from the committed `issues.jsonl` export with two commands:
+
+```bash
+bd init      # creates the Dolt database (.beads/embeddeddolt/) — safe, does not clobber config or issues.jsonl
+bd import    # populates the database from .beads/issues.jsonl
+```
+
+After `bd import`, `bd search`, `bd list`, etc. will work normally.
+
+---
+
 ## ask-repo: Purpose
 
 This repository is an LLM-based expert system for maintaining a knowledge base (KB) about software repositories and associated documents. Claude operates as a KB administrator: adding repos, scanning them, recording knowledge as Beads issues, and answering questions by retrieving KB content. The human may also directly manage Beads issues.
