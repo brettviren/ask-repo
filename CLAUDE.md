@@ -180,12 +180,26 @@ Claude is free to scan deeper at any time to answer a specific question, and sho
 
 ## Query and Answer Workflow
 
+# 🚨 KB UPDATE PROTOCOL 🚨
+
+**MANDATORY**: Every query response that inspects source code or learns new facts MUST end with a KB update. Do NOT consider the answer complete until this checklist is done:
+
+```
+[ ] bd create ...   (new node/edge issues for facts not yet in KB)
+[ ] bd remember ... (update scan coverage or behavioral notes if changed)
+[ ] git add .beads/ && git commit ...
+```
+
+This applies even when the answer came from direct source inspection rather than KB retrieval. If you inspect source to answer a question, the findings belong in the KB.
+
+---
+
 When the user asks a question about repos or documents:
 
 1. **Retrieve**: Run `bd search <keywords>` to find relevant KB nodes and edges. Read `bd memories [search <keywords>]` for relevant behavioral context.
 2. **Augment**: Read retrieved issues to build context. Follow dependency chains to find connected nodes.
 3. **Answer**: Respond using the retrieved KB content plus any direct source inspection needed.
-4. **Update**: At the end of the conversation (not inline), add or update KB issues and memories with anything new learned. Coherence takes priority over real-time updates.
+4. **Update KB** *(mandatory — see protocol above)*: Create or update KB issues for every new node or relationship learned. Commit `.beads/` changes. Update memories if scan coverage or behavioral context changed.
 
 ---
 
