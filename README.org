@@ -6,11 +6,15 @@ base (aka knowledge graph, KB).
 
 * Quick start
 
-Install Beads https://github.com/gastownhall/beads
+Install Beads v1+ (2026-04-02) https://github.com/gastownhall/beads
 
 #+begin_example
 $ git clone --recur git@github.com:brettviren/ask-repo.git
 $ cd ask-repo/
+
+$ bd init
+$ bd dolt remote add origin git@github.com:brettviren/ask-repo.git
+$ bd dolt pull
 
 $ bd search [pattern]   # search KB
 
