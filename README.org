@@ -9,7 +9,7 @@ base (aka knowledge graph, KB).
 Install Beads https://github.com/gastownhall/beads
 
 #+begin_example
-$ git clone git@github.com:brettviren/ask-repo.git
+$ git clone --recur git@github.com:brettviren/ask-repo.git
 $ cd ask-repo/
 
 $ bd search [pattern]   # search KB
