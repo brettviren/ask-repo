@@ -1,0 +1,65 @@
+#+title: ask-repo
+
+This provides a quick and dirty and experimental LLM-based "expert system" that
+"learns" about the Wire-Cell Toolkit and other repos by maintaining a knowledge
+base (aka knowledge graph, KB).
+
+* Quick start
+
+Install Beads https://github.com/gastownhall/beads
+
+#+begin_example
+$ git clone git@github.com:brettviren/ask-repo.git
+$ cd ask-repo/
+
+$ bd search [pattern]   # search KB
+
+$ claude
+
+> Add the repo https://github.com/WireCell/wire-cell-toolkit.git and scan it.
+... (claude asks at what level to scan)
+
+> How do I transform input depo files to output frame files with the WCT simulation?
+... (claude, hopefully gives a good answer)
+#+end_example
+
+* How it works
+
+The entire "system" is in CLAUDE.md and in the Beads issue tracker database in
+this repo and in the git-submodules under =repo/= and possibly extra files under
+=docs/=.  The repos and the docs provide ground truth from which the KB is derived.
+
+The KB serves as a fast, condensed source of facts and relationships.  Claude
+may find information to answer a question there and not have to dig into the
+source or docs and produce a larger context and longer run time.  At least,
+that's the theory.
+
+To get started, Claude will scan a newly added repo (added via git-submodule) at
+a requested depth and scope.  You may request a deeper/wider scan at any time.
+Claude will also add more "knowedge" in the course of generating answers to user
+prompts.
+
+The system (ab)uses Beads issue tracker as the knowledge base (KB).  Claude
+makes KB facts (nodes) and KB relationships (edges) both as Beads issues and
+uses Beads issue dependencies to connect fact-relationship-fact using either
+"related" Beads dependency type for bidirectional relationship or "parent-child"
+dependency type for directional (child points to parent).  Beads "memories" are
+repurposed for meta information about the ask-repo system itself or to hold user
+preferences that may be told to Claude.
+
+Beads issue states of "open" and "closed" are used to infer if a fact or
+relationship has been vetted in some way.  Open issues are not yet vetted,
+closed are.  The =bd ready= can thus be used to find ones to vet.  You can tell
+Claude to vet but Claude should not decide to vet without user prompting.
+
+* Possible todos:
+
+- [ ] Factor things so this general pattern can be separated from the =repo/=,
+  =docs/= and Beads DB content.  Well, basically just copy CLAUDE.md, I guess.
+
+- [ ] Add semantic search to ground truth files and Beads issues.
+
+- [ ] Do something to invalidate/update KB when =repo/= or =docs/= content is
+  refreshed.
+
+  
